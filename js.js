@@ -77,6 +77,37 @@ function preloadNextBook() {
 }
 
 // ==========================================
+// --- 【追加】文字数と画面幅に応じてサイズを自動調整する機能 ---
+// ==========================================
+function adjustFirstLineFontSize(text) {
+  const displayFirstLineElement = document.getElementById('display-first-line');
+  if (!displayFirstLineElement) return;
+
+  const textLength = text.length;
+
+  // スマホ画面（画面幅が768px未満）のときだけ実行
+  if (window.innerWidth < 768) {
+    if (textLength > 60) {
+      // 60文字以上の超長文はかなり小さく
+      displayFirstLineElement.style.fontSize = "13px";
+      displayFirstLineElement.style.lineHeight = "1.5";
+    } else if (textLength > 40) {
+      // 40文字以上の長文は少し小さく
+      displayFirstLineElement.style.fontSize = "15px";
+      displayFirstLineElement.style.lineHeight = "1.6";
+    } else {
+      // 通常サイズ（元のCSSの設定に戻す）
+      displayFirstLineElement.style.fontSize = "18px";
+      displayFirstLineElement.style.lineHeight = "1.8";
+    }
+  } else {
+    // パソコン画面のときは常に元のサイズ
+    displayFirstLineElement.style.fontSize = "18px";
+    displayFirstLineElement.style.lineHeight = "1.8";
+  }
+}
+
+// ==========================================
 // --- モード1：一行目ガチャの処理 ---
 // ==========================================
 const btnModeFirstline = document.getElementById('btn-mode-firstline');
@@ -87,6 +118,10 @@ if(btnModeFirstline) {
       return alert('データの読み込み中です。数秒待ってから再度押してください。');
     }
     document.getElementById('display-first-line').innerHTML = currentBook.firstLine;
+    
+    // ★【追加】文字サイズの調整を実行
+    adjustFirstLineFontSize(currentBook.firstLine);
+
     startScreen.classList.remove('active');
     readingScreen.classList.add('active');
   });
@@ -106,6 +141,9 @@ if(btnNextLine) {
       currentBook = getRandomBook();
       if(currentBook) {
         document.getElementById('display-first-line').innerHTML = currentBook.firstLine;
+        
+        // ★【追加】文字サイズの調整を実行
+        adjustFirstLineFontSize(currentBook.firstLine);
       }
       if (box) {
         box.style.transform = 'scale(1) translateY(0)';

@@ -179,15 +179,18 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
   justify-content: center !important; /* 【重要】中身の画像を水平方向に中央揃えする */
   align-items: center !important;    /* 中身の画像を垂直方向に中央揃えする */
   margin: 20px auto 0 !important;   /* 【重要】文字との隙間を20px空けつつ、枠自体を中央に配置 */
-  height: auto !important;       /* 高さを自動調整にする */
+  height: 340px !important;       /* 高さを自動調整にする */
 }
 
 /* ジャケットの画像自体を大きくする */
 #display-cover-only {
-  width: 57% !important;     /* 枠いっぱいに広げる */
+  width: auto !important;     /* 枠いっぱいに広げる */
   height: auto !important;    /* 縦横比を崩さない */
-  max-height: 480px !important; /* 縦が伸びすぎて画面からはみ出さない上限 */
+  /* 【重要】固定された外枠（340px）の中に綺麗に収める設定 */
+  max-width: 100% !important;    /* 横幅が枠からはみ出さないように制限 */
+  max-height: 100% !important;   /* ★縦幅が枠からはみ出さないように制限 */
+  
   object-fit: contain !important; /* 画像が歪まないように綺麗に収める */
-  border-radius: 7px !important;  /* 画像の角を少し丸くして綺麗に見せる */
-  margin: 0 auto !important;     /* 【追加】画像自体も中央に固定する */
+  border-radius: 7px !important;  /* 画像の角を少し丸くする */
+  margin: 0 !important;
 }

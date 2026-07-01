@@ -171,11 +171,15 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
 
 /* ジャケット表示の白いカード（外枠）を大きくする */
 .cover-only-box {
-  width: 100% !important;      /* 画面の横幅に対して90%まで広げる */
-  max-width: 365px !important; /* 横幅の上限を大きくする（元のサイズに合わせて調整してください） */
-  padding: 20px !important;    /* 枠の中の余白を少し詰めて画像を広げる */
-  box-sizing: border-box !important; /* 【追加】パディングによる幅の広がりを防ぐ */
-  margin: 30 auto !important;     /* 【追加】確実に左右中央に配置する */
+  width: 100% !important;        /* 画面の横幅に対して広げる */
+  max-width: 365px !important;   /* 横幅の上限 */
+  padding: 0px !important;       /* 【変更】内側の余白を0にして画像の位置を安定させる */
+  box-sizing: border-box !important; 
+  display: flex !important;      /* 【重要】フレックスボックスにする */
+  justify-content: center !important; /* 【重要】中身の画像を水平方向に中央揃えする */
+  align-items: center !important;    /* 中身の画像を垂直方向に中央揃えする */
+  margin: 20px auto 0 !important;   /* 【重要】文字との隙間を20px空けつつ、枠自体を中央に配置 */
+  height: auto !important;       /* 高さを自動調整にする */
 }
 
 /* ジャケットの画像自体を大きくする */
@@ -185,5 +189,5 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
   max-height: 480px !important; /* 縦が伸びすぎて画面からはみ出さない上限 */
   object-fit: contain !important; /* 画像が歪まないように綺麗に収める */
   border-radius: 7px !important;  /* 画像の角を少し丸くして綺麗に見せる */
- margin: 0 auto !important;     /* 【追加】画像自体も中央に固定する */
+  margin: 0 auto !important;     /* 【追加】画像自体も中央に固定する */
 }

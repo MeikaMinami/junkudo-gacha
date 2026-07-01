@@ -1,0 +1,189 @@
+/* === ジュンク堂書店を意識したカラーパレット === */
+:root {
+  --brand-color: #0b3d60; 
+  --brand-light: #1a5c8e;
+  --bg-color: #f4f6f8;    
+  --text-main: #333333;
+  --border-color: #d1d9e0;
+  --accent-color: #e67e22; 
+}
+
+body {
+  margin: 0; padding: 0;
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100dvh; 
+  display: flex; flex-direction: column;
+}
+
+/* === 公式ヘッダー === */
+.store-header {
+  background-color: #ffffff; 
+  color: var(--brand-color);
+  padding: 15px 20px;
+  border-bottom: 2px solid var(--brand-color);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  position: sticky; top: 0; z-index: 100;
+}
+.header-inner {
+  max-width: 700px; margin: 0 auto;
+  display: flex; align-items: baseline; gap: 10px;
+}
+.store-logo { font-size: 18px; font-weight: bold; letter-spacing: 1px; font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;}
+.store-sub { font-size: 13px; font-family: 'Helvetica Neue', Arial, sans-serif; opacity: 0.8; }
+
+/* === アプリ領域 === */
+.app-wrapper {
+  flex: 1; display: flex; justify-content: center; align-items: flex-start;
+  padding: 30px 20px;
+}
+
+.container {
+  width: 100%; max-width: 380px;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 40px 24px;
+  min-height: 400px; display: flex; flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.screen { display: none; flex-direction: column; flex: 1; }
+.screen.active { display: flex; justify-content: center; }
+
+/* テキスト装飾 */
+.header { margin-bottom: 30px; text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
+.subtitle { font-size: 12px; color: var(--brand-color); font-weight: bold; margin: 0 0 5px 0; border: 1px solid var(--brand-color); display: inline-block; padding: 3px 8px; border-radius: 2px; }
+h1 { font-size: 26px; color: var(--brand-color); margin: 10px 0; letter-spacing: 1px; }
+h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
+.desc { font-size: 14px; color: #666; margin: 0; }
+
+/* === ボタン設定 === */
+.btn {
+  width: 100%; padding: 16px; font-size: 16px; font-weight: bold;
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  border-radius: 2px; 
+  border: none; cursor: pointer;
+  transition: background 0.2s, opacity 0.2s; -webkit-tap-highlight-color: transparent;
+  letter-spacing: 1px;
+  box-sizing: border-box;
+}
+.btn:active { opacity: 0.7; }
+
+.btn-main { background: var(--brand-color); color: white; }
+.btn-secondary { background: #6c7a89; color: white; }
+.btn-outline { background: transparent; border: 1px solid var(--brand-color); color: var(--brand-color); }
+.btn-action { background: var(--accent-color); color: white; font-family: 'Helvetica Neue', Arial, sans-serif; } 
+
+.btn-text {
+  background: transparent; border: none; color: #7f8c8d; font-size: 14px; padding: 10px;
+  margin-top: 10px; cursor: pointer; text-decoration: underline; font-family: sans-serif;
+}
+
+.mode-select, .btn-row, .action-group {
+  display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 20px; align-items: center;
+}
+.btn-bottom { margin-top: 0px; }
+
+/* コレクション表示枠 */
+.first-line-box {
+  background: #ffffff;
+  border-left: 4px solid var(--brand-color);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  padding: 20px; 
+  margin: 25px 0;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  /* Tinder風の滑らかな変化を保証 */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+#display-first-line {
+  font-size: 18px; 
+  line-height: 1.8; 
+  color: var(--text-main); 
+  font-weight: bold; 
+  margin: 0; 
+  text-align: left;
+  width: 100%;
+}
+
+.cover-only-box { 
+  margin: auto; padding: 20px 0;
+  height: 240px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Tinder風の滑らかな変化を保証 */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+#display-cover-only { width: auto; height: 100%; max-height: 220px; box-shadow: 2px 4px 10px rgba(0,0,0,0.1); }
+
+.result-layout { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.result-right { width: 100%; display: flex; flex-direction: column; align-items: center; }
+#result-img { width: 150px; height: auto; box-shadow: 2px 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
+#result-author { color: #666; font-size: 15px; }
+
+.location-box {
+  display: none; background: #fffdfa; color: var(--text-main); border: 1px solid var(--accent-color);
+  border-left: 4px solid var(--accent-color); padding: 15px; font-size: 15px; width: 100%; box-sizing: border-box; text-align: left; line-height: 1.6;
+}
+.section-label { font-size: 13px; color: #888; text-align: center; font-family: sans-serif; }
+
+/* === 結果画面用のふわっと表示されるアニメーション === */
+.fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0; 
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); 
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);    
+  }
+}
+
+/* === PC・タブレット向けのレスポンシブ === */
+@media (min-width: 768px) {
+  .app-wrapper { padding: 50px 20px; }
+  .container { max-width: 700px; padding: 50px 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: none; }
+  
+  .header { margin-bottom: 40px; }
+  h1 { font-size: 32px; }
+
+  .mode-select, .btn-row { flex-direction: row; justify-content: center; gap: 20px; }
+  .btn { width: auto; min-width: 240px; }
+
+  .result-layout { flex-direction: row; align-items: flex-start; gap: 50px; text-align: left; width: 100%; }
+  .result-left { flex: 0 0 200px; }
+  #result-img { width: 100%; margin-bottom: 0; }
+  
+  .result-right { flex: 1; align-items: flex-start; }
+  .align-left { align-items: flex-start; margin-top: 30px; }
+}
+
+/* ジャケット表示の白いカード（外枠）を大きくする */
+.cover-only-box {
+  width: 100% !important;      /* 画面の横幅に対して90%まで広げる */
+  max-width: 365px !important; /* 横幅の上限を大きくする（元のサイズに合わせて調整してください） */
+  padding: 20px !important;    /* 枠の中の余白を少し詰めて画像を広げる */
+  box-sizing: border-box !important; /* 【追加】パディングによる幅の広がりを防ぐ */
+  margin: 0 auto !important;     /* 【追加】確実に左右中央に配置する */
+}
+
+/* ジャケットの画像自体を大きくする */
+#display-cover-only {
+  width: 57% !important;     /* 枠いっぱいに広げる */
+  height: auto !important;    /* 縦横比を崩さない */
+  max-height: 480px !important; /* 縦が伸びすぎて画面からはみ出さない上限 */
+  object-fit: contain !important; /* 画像が歪まないように綺麗に収める */
+  border-radius: 7px !important;  /* 画像の角を少し丸くして綺麗に見せる */
+ margin: 0 auto !important;     /* 【追加】画像自体も中央に固定する */
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>運命の本ガチャ</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="js.js" defer></script>
+</head>
+<body>
+
+  <header class="store-header">
+    <div class="header-inner">
+      <span class="store-logo">ジュンク堂書店</span>
+      <span class="store-sub">大阪本店</span>
+    </div>
+  </header>
+
+  <div class="app-wrapper">
+    <div class="container">
+      
+      <div id="start-screen" class="screen active">
+        <div class="header">
+          <p class="subtitle">店舗連動 本との偶然の出会い</p>
+          <h1>運命の本ガチャ</h1>
+          <p class="desc">圧倒的な蔵書から、未知の一冊を。</p>
+        </div>
+        <div class="mode-select">
+          <button id="btn-mode-firstline" class="btn btn-main">一行目を引く</button>
+          <button id="btn-mode-cover" class="btn btn-secondary">ジャケットを引く</button>
+        </div>
+      </div>
+
+      <div id="reading-screen" class="screen">
+        <p class="section-label">あなたが出会った一行目</p>
+        <div class="first-line-box">
+          <p id="display-first-line">（ここに一行目が出ます）</p>
+        </div>
+        <div class="action-group">
+          <div class="btn-row">
+            <button id="btn-reveal-from-line" class="btn btn-main">この本の詳細を見る</button>
+            <button id="btn-next-line" class="btn btn-outline">他の一行目を見る</button>
+          </div>
+          <button id="btn-back-from-line" class="btn-text">モード選択に戻る</button>
+        </div>
+      </div>
+
+      <div id="cover-screen" class="screen">
+        <p class="section-label">直感で選ぶジャケット</p>
+        <div class="cover-only-box">
+          <img id="display-cover-only" src="" alt="表紙のみ">
+        </div>
+        <div class="action-group">
+          <div class="btn-row">
+            <button id="btn-reveal-from-cover" class="btn btn-main">この本の詳細を見る</button>
+            <button id="btn-next-cover" class="btn btn-outline">他のジャケットを見る</button>
+          </div>
+          <button id="btn-back-from-cover" class="btn-text">モード選択に戻る</button>
+        </div>
+      </div>
+
+      <div id="result-screen" class="screen">
+        <div class="result-layout">
+          <div class="result-left">
+            <img id="result-img" src="" alt="表紙画像">
+          </div>
+          <div class="result-right">
+            <h2 id="result-title">本のタイトル</h2>
+            <p id="result-author">著者名</p>
+            <div class="action-group align-left">
+              <button id="btn-location" class="btn btn-action">大阪本店の在庫・棚を見る</button>
+              <div id="result-location" class="location-box"></div>
+              <button id="btn-retry" class="btn btn-outline btn-bottom">最初に戻る</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -178,8 +178,8 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
   display: flex !important;      /* 【重要】フレックスボックスにする */
   justify-content: center !important; /* 【重要】中身の画像を水平方向に中央揃えする */
   align-items: center !important;    /* 中身の画像を垂直方向に中央揃えする */
-  margin: 10px auto 0 !important;   /* 【重要】文字との隙間を20px空けつつ、枠自体を中央に配置 */
-  height: 340px !important;       /* 高さを自動調整にする */
+  margin: 10px auto 0 !important;   /* 【重要】文字との隙間を10px空けつつ、枠自体を中央に配置 */
+  height: 300px !important;       /* ★ここでお好みの高さに固定します */
 }
 
 /* ジャケットの画像自体を大きくする */

@@ -194,3 +194,9 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
   border-radius: 7px !important;  /* 画像の角を少し丸くする */
   margin: 0 !important;
 }
+
+/* 「直感で選ぶジャケット」の文字を少し上に引き上げる */
+#cover-screen .section-label {
+  margin-top: -20px !important; /* ★マイナスの値で上に引っ張ります（お好みで -30px などに調整可） */
+  margin-bottom: 10px !important; /* 文字と画像との間のバランスを微調整 */
+}

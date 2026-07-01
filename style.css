@@ -175,7 +175,7 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
   max-width: 365px !important; /* 横幅の上限を大きくする（元のサイズに合わせて調整してください） */
   padding: 20px !important;    /* 枠の中の余白を少し詰めて画像を広げる */
   box-sizing: border-box !important; /* 【追加】パディングによる幅の広がりを防ぐ */
-  margin: 0 auto !important;     /* 【追加】確実に左右中央に配置する */
+  margin: 10 auto !important;     /* 【追加】確実に左右中央に配置する */
 }
 
 /* ジャケットの画像自体を大きくする */

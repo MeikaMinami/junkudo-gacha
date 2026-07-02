@@ -287,7 +287,7 @@ const btnShare = document.getElementById('btn-share');
 if (btnShare) {
   // 【新機能】パソコン画面（768px以上）のとき、ボタンの見た目をX（旧Twitter）仕様に変える
   if (window.innerWidth >= 768) {
-    btnShare.textContent = 'X（旧Twitter）で共有する';
+    btnShare.textContent = 'X（Twitter）で共有する';
     btnShare.style.backgroundColor = '#000000'; // Xのブランドカラー（黒）
     btnShare.style.color = '#ffffff';           // 文字を白に
     btnShare.style.borderColor = '#000000';     // 枠線も黒に

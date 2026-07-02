@@ -226,15 +226,17 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
 @media (min-width: 768px) {
   /* 白いカード（.container）の中で、全体を完全に中央へロックする */
   .result-layout {
-    display: grid !important;           /* ★【重要】FlexboxからGridに変更 */
-    grid-template-columns: 150px 240px; /* ★画像の幅(150px)とボタンの幅(240px)をガチッと固定 */
+    display: grid !important;           /* Gridレイアウトを維持 */
     
-    /* ★【超重要】これらが画像と文字のカタマリをカードの「真ん中」に強制配置します */
+    /* ★【修正】画像の幅を 180px に拡大し、ボタンの幅(240px)と並べます */
+    grid-template-columns: 180px 240px; 
+    
+    /* 全体をカードの「真ん中」に強制配置 */
     justify-content: center !important; 
     align-content: center !important;
     
-    /* ★画像と文字の間の隙間を15pxにギュッと密着 */
-    gap: 15px !important;               
+    /* ★【修正】画像と文字の間の隙間を 25px に広げて、画像を少し左へ離します */
+    gap: 25px !important;               
     
     width: 100% !important;
     margin: 0 auto !important;
@@ -248,7 +250,8 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
   }
 
   #result-img {
-    width: 150px !important;
+    /* ★【修正】画像の横幅を 180px に拡大 */
+    width: 180px !important;
     height: auto !important;
     margin-bottom: 0 !important;
   }

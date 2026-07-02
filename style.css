@@ -224,49 +224,68 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
 
 /* === 【解決】PC表示のとき、本の詳細画面が左に寄るのを直す === */
 @media (min-width: 768px) {
-  /* 結果画面のレイアウトを横並びの100%に広げ、位置を安定させる */
+  /* 白いカード（.container）の中で、全体を左右均等に中央配置する */
   .result-layout {
     display: flex !important;
     flex-direction: row !important;
-    align-items: center !important;   /* 画像と右側の文章の縦の中心を揃える */
-    justify-content: center !important; /* 左右の余白を均等にする */
-    gap: 40px !important;
+    align-items: center !important;     /* 画像と右側ブロックの縦の中心を揃える */
+    justify-content: center !important; /* ★左右の余白を均等にして、全体を真ん中に寄せる */
+    gap: 40px !important;               /* 画像と右側テキストとの間の隙間 */
     width: 100% !important;
+    max-width: 550px !important;        /* ★全体の横幅をあえて少し狭めて、中央にぎゅっと凝縮させる */
+    margin: 0 auto !important;          /* カード内での中央揃え */
   }
 
   /* 左側の画像エリア */
   .result-left {
-    flex: 0 0 180px !important;
+    flex: 0 0 160px !important;         /* 画像の幅を少しコンパクトに */
     display: flex !important;
     justify-content: center !important;
   }
 
   #result-img {
     width: 100% !important;
-    max-width: 180px !important;
+    max-width: 160px !important;
     margin-bottom: 0 !important;
   }
 
-  /* 右側のテキストとボタンのエリア */
+  /* 右側のテキストとボタンのエリア（ここを中央に寄せます） */
   .result-right {
     flex: 1 !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: stretch !important;    /* ★【変更】中身のボタンを右側いっぱいに均等に広げる */
-    text-align: left !important;
+    align-items: center !important;     /* ★タイトル・著者・ボタンをすべて中央揃えにする */
+    text-align: center !important;      /* ★文字も中央揃えにする */
   }
 
-  /* ボタンたちのグループ（古い.align-leftの悪さを完全に打ち消す） */
+  /* 本のタイトルと著者名 */
+  #result-title {
+    font-size: 22px !important;
+    text-align: center !important;
+    margin-top: 0 !important;
+  }
+  #result-author {
+    text-align: center !important;
+  }
+
+  /* ボタンたちのグループ */
   .result-right .action-group, 
   .result-right .action-group.align-left {
-    align-items: stretch !important;   /* ★【重要】ボタンの横幅を100%に広げる */
+    align-items: center !important;     /* ★ボタンの並び自体を中央揃えにする */
     width: 100% !important;
-    margin-top: 20px !important;
+    margin-top: 15px !important;
   }
 
-  /* グループ内の各ボタン自体も横幅100%にする */
+  /* グループ内の各ボタン（押しやすい幅を保ったまま中央へ） */
   .result-right .action-group .btn {
-    width: 100% !important;            /* ★【重要】149行目の width: auto を上書きして100%に */
-    min-width: 100% !important;
+    width: 240px !important;            /* ★ボタンが伸びすぎないよう、149行目の240pxをキープ */
+    min-width: 240px !important;
+    margin: 0 auto !important;          /* ボタンを中央に寄せる */
+  }
+  
+  /* 在庫場所のボックスもボタンと同じ幅で中央揃え */
+  .location-box {
+    width: 240px !important;
+    margin: 0 auto !important;
   }
 }

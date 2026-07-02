@@ -278,3 +278,36 @@ if(retryBtn) {
     preloadNextBook();
   });
 }
+
+// ==========================================
+// --- Web Share API（シェア機能）の処理 ---
+// ==========================================
+const btnShare = document.getElementById('btn-share');
+
+if (btnShare) {
+  btnShare.addEventListener('click', async () => {
+    // 現在ガチャで出ている本の情報をまとめる
+    const shareTitle = `運命の本ガチャで「${currentBook.title}」に出会いました！`;
+    const shareText = `ジュンク堂書店 大阪本店で、未知の一冊を引き当てよう。`;
+    const shareUrl = window.location.href; // いま開いているこのページのURL
+
+    // ① ブラウザが Web Share API に対応しているかチェック
+    if (navigator.share) {
+      try {
+        // スマホ標準のシェア画面を呼び出す
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl
+        });
+        console.log('シェア成功！');
+      } catch (error) {
+        console.log('シェアがキャンセルされました', error);
+      }
+    } else {
+      // ② 対応していない場合（PCなど）は、予備処理としてX（旧Twitter）の投稿画面を開く
+      const xShareUrl = `https://twitter.com/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareTitle + '\n' + shareText)}`;
+      window.open(xShareUrl, '_blank');
+    }
+  });
+}

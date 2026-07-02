@@ -285,33 +285,35 @@ if(retryBtn) {
 const btnShare = document.getElementById('btn-share');
 
 if (btnShare) {
+  // 【新機能】パソコン画面（768px以上）のとき、ボタンの見た目をX（旧Twitter）仕様に変える
+  if (window.innerWidth >= 768) {
+    btnShare.textContent = 'X（旧Twitter）で共有する';
+    btnShare.style.backgroundColor = '#000000'; // Xのブランドカラー（黒）
+    btnShare.style.color = '#ffffff';           // 文字を白に
+    btnShare.style.borderColor = '#000000';     // 枠線も黒に
+  }
+
   btnShare.addEventListener('click', () => {
-    
     let shareText = '';
-    
-    // 【解決1】「今、読書画面（reading-screen）がアクティブかどうか」で確実に判定
     const isReadingScreenActive = document.getElementById('reading-screen').classList.contains('active');
 
     if (isReadingScreenActive && currentBook.firstLine) {
-      // 一行目モードから結果に来た場合
       shareText = `運命の本ガチャで素敵な本に出会いました！\n\n` +
                   `💡心に刺さった一行目:\n「${currentBook.firstLine}」\n\n` +
                   `📖『${currentBook.title}』(${currentBook.author})\n\n`;
     } else {
-      // ジャケットモードから結果に来た場合
       shareText = `運命の本ガチャでジャケットで選んだ本はこちら！\n\n` +
                   `📖『${currentBook.title}』(${currentBook.author})\n\n`;
     }
 
-    // キャッチコピーとハッシュタグを合流
     shareText += `▼本との偶然の出会いを楽しもう\n` +
                   `#運命の本ガチャ #ジュンク堂書店大阪本店`;
 
     const shareTitle = `運命の本ガチャ`;
     const shareUrl = window.location.href; // このホームページのリンク
 
-    // ① ブラウザが Web Share API に対応しているかチェック（スマホなど）
-    if (navigator.share) {
+    // スマホ（画面幅768px未満）かつ Web Share APIに対応している場合だけシェア画面を開く
+    if (window.innerWidth < 768 && navigator.share) {
       navigator.share({
         title: shareTitle,
         text: shareText,
@@ -324,7 +326,7 @@ if (btnShare) {
         }
       });
     } else {
-      // 【解決2】パソコン（Xの予備処理）で、文章（text）とリンク（url）を綺麗に分離して送る
+      // パソコンまたはWeb Share未対応なら、強制的にX（旧Twitter）を開く
       const xShareUrl = `https://twitter.com/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
       window.open(xShareUrl, '_blank');
     }

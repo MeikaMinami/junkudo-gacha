@@ -251,7 +251,7 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
 
   #result-img {
     /* ★【ここがポイント】横幅ではなく、縦幅を 240px に固定します */
-    height: 300px !important;
+    height: 280px !important;
     width: auto !important;             /* 横幅は比率を崩さず自動計算 */
     
     object-fit: contain !important;     /* 万が一の画像歪みを完全に防止 */

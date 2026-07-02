@@ -285,50 +285,47 @@ if(retryBtn) {
 const btnShare = document.getElementById('btn-share');
 
 if (btnShare) {
-  // Safariのために async を外して、普通のクリックイベントにします
   btnShare.addEventListener('click', () => {
     
-    // --- 【修正】シェアする内容の自動作成（文言追加版） ---
-  let shareText = '';
+    let shareText = '';
+    
+    // 【解決1】「今、読書画面（reading-screen）がアクティブかどうか」で確実に判定
+    const isReadingScreenActive = document.getElementById('reading-screen').classList.contains('active');
 
-  // 一行目モードから結果に来た場合、かつ一行目のデータが存在するとき
-  if (currentBook.firstLine && document.getElementById('display-first-line').textContent !== '（ここに一行目が出ます）') {
-    shareText = `運命の本ガチャで素敵な本に出会いました！\n\n` +
-                `💡心に刺さる一行目:\n「${currentBook.firstLine}」\n\n` +
-                `📖『${currentBook.title}』(${currentBook.author})\n\n`;
-  } else {
-    // ジャケットモードから結果に来た場合
-    shareText = `運命の本ガチャで直感で選んだ本はこちら！\n\n` +
-                `📖『${currentBook.title}』(${currentBook.author})\n\n`;
-  }
+    if (isReadingScreenActive && currentBook.firstLine) {
+      // 一行目モードから結果に来た場合
+      shareText = `運命の本ガチャで素敵な本に出会いました！\n\n` +
+                  `💡心に刺さる一行目:\n「${currentBook.firstLine}」\n\n` +
+                  `📖『${currentBook.title}』(${currentBook.author})\n\n`;
+    } else {
+      // ジャケットモードから結果に来た場合
+      shareText = `運命の本ガチャで直感で選んだ本はこちら！\n\n` +
+                  `📖『${currentBook.title}』(${currentBook.author})\n\n`;
+    }
 
-  // ★【追加】キャッチコピーとハッシュタグを合流させる
-  shareText += `▼本との偶然の出会いを楽しもう\n` +
-                `#運命の本ガチャ #ジュンク堂書店大阪本店`;
+    // キャッチコピーとハッシュタグを合流
+    shareText += `▼本との偶然の出会いを楽しもう\n` +
+                  `#運命の本ガチャ #ジュンク堂書店大阪本店`;
 
-  const shareTitle = `運命の本ガチャ`;
-  const shareUrl = window.location.href; // このホームページのリンク
+    const shareTitle = `運命の本ガチャ`;
+    const shareUrl = window.location.href; // このホームページのリンク
 
-    // ① ブラウザが Web Share API に対応しているかチェック
+    // ① ブラウザが Web Share API に対応しているかチェック（スマホなど）
     if (navigator.share) {
-      // Safariのために await を使わず、ダイレクトに呼び出します
       navigator.share({
         title: shareTitle,
         text: shareText,
         url: shareUrl
       })
-      .then(() => {
-        console.log('シェア成功！');
-      })
+      .then(() => { console.log('シェア成功！'); })
       .catch((error) => {
-        // ★【スマホ用デバッグ】もしSafariが拒否したら、画面にアラートを出して理由を教えてもらう
         if (error.name !== 'AbortError') { 
           alert('Safariのエラー: ' + error.message);
         }
       });
     } else {
-      // ② 対応していない場合の予備処理（Xを開く）
-      const xShareUrl = `https://twitter.com/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareTitle + '\n' + shareText)}`;
+      // 【解決2】パソコン（Xの予備処理）で、文章（text）とリンク（url）を綺麗に分離して送る
+      const xShareUrl = `https://twitter.com/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
       window.open(xShareUrl, '_blank');
     }
   });

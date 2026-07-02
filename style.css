@@ -220,3 +220,46 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
 #result-author {
   margin-top: 0px !important;    /* ★著者名の上側の隙間を「0」にして、タイトルに近づけます */
 }
+
+
+/* === 【解決】PC表示のとき、本の詳細画面が左に寄るのを直す === */
+@media (min-width: 768px) {
+  /* 結果画面のレイアウトを横並びの100%に広げ、位置を安定させる */
+  .result-layout {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;   /* 画像と右側の文章の縦の中心を揃える */
+    justify-content: center !important; /* 左右の余白を均等にする */
+    gap: 40px !important;
+    width: 100% !important;
+  }
+
+  /* 左側の画像エリア */
+  .result-left {
+    flex: 0 0 180px !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  #result-img {
+    width: 100% !important;
+    max-width: 180px !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* 右側のテキストとボタンのエリア */
+  .result-right {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; /* 文字とボタンの開始位置を左に揃える */
+    text-align: left !important;
+  }
+
+  /* ボタンたちのグループ（PCの時は左に沿って綺麗に並べる） */
+  .result-right .action-group {
+    align-items: flex-start !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+  }
+}

@@ -288,10 +288,26 @@ if (btnShare) {
   // Safariのために async を外して、普通のクリックイベントにします
   btnShare.addEventListener('click', () => {
     
-    // 現在ガチャで出ている本の情報をまとめる
-    const shareTitle = `運命の本ガチャで「${currentBook.title}」に出会いました！`;
-    const shareText = `ジュンク堂書店 大阪本店で、未知の一冊を引き当てよう。`;
-    const shareUrl = window.location.href; // いま開いているこのページのURL
+    // --- 【修正】シェアする内容の自動作成（文言追加版） ---
+  let shareText = '';
+
+  // 一行目モードから結果に来た場合、かつ一行目のデータが存在するとき
+  if (currentBook.firstLine && document.getElementById('display-first-line').textContent !== '（ここに一行目が出ます）') {
+    shareText = `運命の本ガチャで素敵な本に出会いました！\n\n` +
+                `💡心に刺さる一行目:\n「${currentBook.firstLine}」\n\n` +
+                `📖『${currentBook.title}』(${currentBook.author})\n\n`;
+  } else {
+    // ジャケットモードから結果に来た場合
+    shareText = `運命の本ガチャで直感で選んだ本はこちら！\n\n` +
+                `📖『${currentBook.title}』(${currentBook.author})\n\n`;
+  }
+
+  // ★【追加】キャッチコピーとハッシュタグを合流させる
+  shareText += `▼本との偶然の出会いを楽しもう\n` +
+                `#運命の本ガチャ #ジュンク堂書店大阪本店`;
+
+  const shareTitle = `運命の本ガチャ`;
+  const shareUrl = window.location.href; // このホームページのリンク
 
     // ① ブラウザが Web Share API に対応しているかチェック
     if (navigator.share) {

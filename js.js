@@ -285,7 +285,9 @@ if(retryBtn) {
 const btnShare = document.getElementById('btn-share');
 
 if (btnShare) {
-  btnShare.addEventListener('click', async () => {
+  // Safariのために async を外して、普通のクリックイベントにします
+  btnShare.addEventListener('click', () => {
+    
     // 現在ガチャで出ている本の情報をまとめる
     const shareTitle = `運命の本ガチャで「${currentBook.title}」に出会いました！`;
     const shareText = `ジュンク堂書店 大阪本店で、未知の一冊を引き当てよう。`;
@@ -293,19 +295,23 @@ if (btnShare) {
 
     // ① ブラウザが Web Share API に対応しているかチェック
     if (navigator.share) {
-      try {
-        // スマホ標準のシェア画面を呼び出す
-        await navigator.share({
-          title: shareTitle,
-          text: shareText,
-          url: shareUrl
-        });
+      // Safariのために await を使わず、ダイレクトに呼び出します
+      navigator.share({
+        title: shareTitle,
+        text: shareText,
+        url: shareUrl
+      })
+      .then(() => {
         console.log('シェア成功！');
-      } catch (error) {
-        console.log('シェアがキャンセルされました', error);
-      }
+      })
+      .catch((error) => {
+        // ★【スマホ用デバッグ】もしSafariが拒否したら、画面にアラートを出して理由を教えてもらう
+        if (error.name !== 'AbortError') { 
+          alert('Safariのエラー: ' + error.message);
+        }
+      });
     } else {
-      // ② 対応していない場合（PCなど）は、予備処理としてX（旧Twitter）の投稿画面を開く
+      // ② 対応していない場合の予備処理（Xを開く）
       const xShareUrl = `https://twitter.com/share?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareTitle + '\n' + shareText)}`;
       window.open(xShareUrl, '_blank');
     }

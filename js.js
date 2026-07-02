@@ -295,11 +295,11 @@ if (btnShare) {
     if (isReadingScreenActive && currentBook.firstLine) {
       // 一行目モードから結果に来た場合
       shareText = `運命の本ガチャで素敵な本に出会いました！\n\n` +
-                  `💡心に刺さる一行目:\n「${currentBook.firstLine}」\n\n` +
+                  `💡心に刺さった一行目:\n「${currentBook.firstLine}」\n\n` +
                   `📖『${currentBook.title}』(${currentBook.author})\n\n`;
     } else {
       // ジャケットモードから結果に来た場合
-      shareText = `運命の本ガチャで直感で選んだ本はこちら！\n\n` +
+      shareText = `運命の本ガチャでジャケットで選んだ本はこちら！\n\n` +
                   `📖『${currentBook.title}』(${currentBook.author})\n\n`;
     }
 

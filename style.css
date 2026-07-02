@@ -224,21 +224,24 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
 
 /* === 【解決】PC表示のとき、本の詳細画面が左に寄るのを直す === */
 @media (min-width: 768px) {
-  /* 白いカード（.container）の中で、全体を左右均等に中央配置する */
+  /* 白いカード（.container）の中で、全体を中央に寄せつつ、画像とテキストを近づける */
   .result-layout {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;     /* 画像と右側ブロックの縦の中心を揃える */
-    justify-content: center !important; /* ★左右の余白を均等にして、全体を真ん中に寄せる */
-    gap: 40px !important;               /* 画像と右側テキストとの間の隙間 */
+    justify-content: center !important; /* 全体を白いカードの中央に配置 */
+    
+    /* ★【修正】ここを変えます！40pxから20pxに縮めて、画像と文字を近づけます */
+    gap: 20px !important;               
+    
     width: 100% !important;
-    max-width: 550px !important;        /* ★全体の横幅をあえて少し狭めて、中央にぎゅっと凝縮させる */
+    max-width: 550px !important;        /* 全体の横幅の制限（中央に凝縮させるため） */
     margin: 0 auto !important;          /* カード内での中央揃え */
   }
 
   /* 左側の画像エリア */
   .result-left {
-    flex: 0 0 160px !important;         /* 画像の幅を少しコンパクトに */
+    flex: 0 0 160px !important;         /* 画像の幅（160px） */
     display: flex !important;
     justify-content: center !important;
   }
@@ -254,8 +257,11 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
     flex: 1 !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important;     /* ★タイトル・著者・ボタンをすべて中央揃えにする */
-    text-align: center !important;      /* ★文字も中央揃えにする */
+    align-items: center !important;     /* タイトル・著者・ボタンをすべて中央揃えにする */
+    text-align: center !important;      /* 文字も中央揃えにする */
+    
+    /* ★【追加】画像との距離をさらに縮めるための微調整。左側の余白を減らす */
+    padding-left: 0 !important;         
   }
 
   /* 本のタイトルと著者名 */
@@ -271,14 +277,14 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
   /* ボタンたちのグループ */
   .result-right .action-group, 
   .result-right .action-group.align-left {
-    align-items: center !important;     /* ★ボタンの並び自体を中央揃えにする */
+    align-items: center !important;     /* ボタンの並び自体を中央揃えにする */
     width: 100% !important;
     margin-top: 15px !important;
   }
 
   /* グループ内の各ボタン（押しやすい幅を保ったまま中央へ） */
   .result-right .action-group .btn {
-    width: 240px !important;            /* ★ボタンが伸びすぎないよう、149行目の240pxをキープ */
+    width: 240px !important;            /* ボタンが伸びすぎないよう、240pxをキープ */
     min-width: 240px !important;
     margin: 0 auto !important;          /* ボタンを中央に寄せる */
   }
@@ -289,3 +295,4 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
     margin: 0 auto !important;
   }
 }
+

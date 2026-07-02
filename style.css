@@ -226,16 +226,16 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
 @media (min-width: 768px) {
   /* 白いカード（.container）の中で、全体を完全に中央へロックする */
   .result-layout {
-    display: grid !important;           /* Gridレイアウトを維持 */
+    display: grid !important;           /* Gridレイアウト */
     
-    /* ★【修正】画像の幅を 180px に拡大し、ボタンの幅(240px)と並べます */
-    grid-template-columns: 180px 240px; 
+    /* ★【重要】左側は画像の縦幅に合わせて自動計算された横幅（max-content）、右側はボタンの幅（240px） */
+    grid-template-columns: max-content 240px; 
     
     /* 全体をカードの「真ん中」に強制配置 */
     justify-content: center !important; 
     align-content: center !important;
     
-    /* ★【修正】画像と文字の間の隙間を 25px に広げて、画像を少し左へ離します */
+    /* 画像と文字の間の隙間（お好みで 20px〜30px 辺りに微調整可能です） */
     gap: 25px !important;               
     
     width: 100% !important;
@@ -250,9 +250,11 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
   }
 
   #result-img {
-    /* ★【修正】画像の横幅を 180px に拡大 */
-    width: 180px !important;
-    height: auto !important;
+    /* ★【ここがポイント】横幅ではなく、縦幅を 240px に固定します */
+    height: 240px !important;
+    width: auto !important;             /* 横幅は比率を崩さず自動計算 */
+    
+    object-fit: contain !important;     /* 万が一の画像歪みを完全に防止 */
     margin-bottom: 0 !important;
   }
 
@@ -262,6 +264,7 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
     flex-direction: column !important;
     align-items: center !important;     /* タイトル・著者・ボタンをすべて中央揃えにする */
     text-align: center !important;      /* 文字も中央揃えにする */
+    justify-content: center !important; /* 縦方向も画像の中央と揃える */
   }
 
   /* 本のタイトルと著者名 */
@@ -279,7 +282,7 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
   /* ボタンたちのグループ */
   .result-right .action-group, 
   .result-right .action-group.align-left {
-    align-items: center !important;     /* ボタンの並び自体を中央揃えにする */
+    align-items: center !important;     /* ボタン的の並び自体を中央揃えにする */
     width: 240px !important;            /* 240pxに固定して一体感を出す */
     margin-top: 15px !important;
   }

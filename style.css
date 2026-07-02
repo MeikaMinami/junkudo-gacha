@@ -252,14 +252,21 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
     flex: 1 !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important; /* 文字とボタンの開始位置を左に揃える */
+    align-items: stretch !important;    /* ★【変更】中身のボタンを右側いっぱいに均等に広げる */
     text-align: left !important;
   }
 
-  /* ボタンたちのグループ（PCの時は左に沿って綺麗に並べる） */
-  .result-right .action-group {
-    align-items: flex-start !important;
+  /* ボタンたちのグループ（古い.align-leftの悪さを完全に打ち消す） */
+  .result-right .action-group, 
+  .result-right .action-group.align-left {
+    align-items: stretch !important;   /* ★【重要】ボタンの横幅を100%に広げる */
     width: 100% !important;
     margin-top: 20px !important;
+  }
+
+  /* グループ内の各ボタン自体も横幅100%にする */
+  .result-right .action-group .btn {
+    width: 100% !important;            /* ★【重要】149行目の width: auto を上書きして100%に */
+    min-width: 100% !important;
   }
 }

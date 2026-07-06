@@ -301,3 +301,15 @@ h2 { font-size: 22px; margin: 10px 0 5px 0; color: var(--text-main); }
   }
 }
 
+/* === ヘッダーロゴのリンク用デザイン調整 === */
+.header-logo-link {
+  text-decoration: none !important; /* 下線を消す */
+  color: inherit !important;           /* 元の紺色をそのまま引き継ぐ */
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  cursor: pointer;                     /* マウスを乗せたときに指マークにする */
+}
+.header-logo-link:hover {
+  opacity: 0.8;                        /* パソコンで触れた時にちょっと薄くなって「押せる感」を出す */
+}

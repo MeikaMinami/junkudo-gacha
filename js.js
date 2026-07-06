@@ -332,3 +332,33 @@ if (btnShare) {
     }
   });
 }
+
+
+// ==========================================
+// --- ヘッダーロゴを押したときに最初に戻る処理 ---
+// ==========================================
+const btnHeaderLogo = document.getElementById('btn-header-logo');
+
+if (btnHeaderLogo) {
+  btnHeaderLogo.addEventListener('click', (e) => {
+    e.preventDefault(); // 画面をリロード（再読み込み）させずに処理するおまじない
+    
+    // すべての画面（スクリーン）から「active」を一度消し去る
+    document.querySelectorAll('.screen').forEach(screen => {
+      screen.classList.remove('active');
+    });
+    
+    // 最初（スタート画面）だけをアクティブにする
+    const startScreen = document.getElementById('start-screen');
+    if (startScreen) {
+      startScreen.classList.add('active');
+    }
+    
+    // （任意）もし次の本の予約があれば、裏で新しく仕込み直しておく
+    if (typeof preloadNextBook === 'function') {
+      preloadNextBook();
+    }
+    
+    console.log('ヘッダーロゴから最初の画面に戻りました！');
+  });
+}
